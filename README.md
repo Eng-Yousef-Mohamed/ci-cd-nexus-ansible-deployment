@@ -30,9 +30,7 @@ This project demonstrates the automated installation of Nexus on an AWS EC2 inst
    - [Terraform Setup](#terraform-setup)
    - [Ansible Setup](#ansible-setup)
    - [Jenkins Setup](#jenkins-setup)
-4. [Usage](#usage)
-5. [Contributing](#contributing)
-6. [License](#license)
+
 
 ## Project Structure
 
@@ -67,3 +65,13 @@ Before starting, ensure that you have the following tools installed and configur
 - Ansible: Configuration management tool.
 - Jenkins: For setting up the CI/CD pipeline.
 - Docker: For creating Jenkins agents.
+# Setup Instructions
+Terraform Setup
+Navigate to the terraform/ directory.
+Initialize Terraform and apply the Terraform configuration to provision the VPC, subnets, and EC2 instance:
+```bash
+terraform init
+terraform apply
+```
+Terraform will output an inventory file (inventory.ini) that includes the public IP of the EC2 instance.
+The inventory file is automatically pushed to a designated GitHub repository for Ansible to use.
