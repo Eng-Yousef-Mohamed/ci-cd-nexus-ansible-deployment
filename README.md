@@ -54,7 +54,7 @@ This project demonstrates the automated installation of Nexus on an AWS EC2 inst
 │   └── Dockerfile.ansible     # Jenkins agent Dockerfile for Ansible
 └── README.md                  # Project documentation
 ```
-##Pre-requisites
+## Pre-requisites
 **Before starting, ensure that you have the following tools installed and configured on your local machine:**
 
 - AWS Account: To provision infrastructure on AWS.
