@@ -52,7 +52,7 @@ This project demonstrates the automated installation of Nexus on an AWS EC2 inst
 │           ├── tasks/         # Ansible tasks for Nexus installation
 │           └── templates/     # Any necessary templates for Nexus configuration
 ├── Jenkinsfile                # Jenkins pipeline definition
-├── docker/
+├── Dockerfile
 └── README.md                  # Project documentation
 
 ```
