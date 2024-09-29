@@ -1,0 +1,80 @@
+- name: Install Nexus
+  hosts: ec2 
+  user: ubuntu
+  become: true 
+  tasks:
+    - name: Install required packages
+      apt:
+        name:
+          - openjdk-17-jdk
+          - openjdk-11-jdk-headless
+          - wget
+          - unzip
+        state: present
+        update_cache: yes
+
+    - name: Add user
+      user: 
+        name: nexus
+        create_home: yes
+
+    - name: Create Nexus installation directory
+      file:
+        path: /home/nexus/app
+        state: directory
+
+    - name: Download Nexus
+      get_url:
+        url: https://download.sonatype.com/nexus/3/nexus-3.72.0-04-unix.tar.gz
+        dest: /home/nexus/app
+
+    - name: Unpack Nexus
+      unarchive:
+        src: /home/nexus/app/nexus-3.72.0-04-unix.tar.gz
+        dest: /home/nexus/app
+        remote_src: yes
+
+    - name: Change ownership of Nexus files
+      file:
+        path: "{{ item }}"
+        owner: nexus
+        group: nexus
+        state: directory
+      loop:
+        - /home/nexus/app
+        - /home/nexus/app/nexus-3.72.0-04
+        - /home/nexus/app/sonatype-work
+
+    - name: Set nexus.properties for data directory
+      lineinfile:
+        path: /home/nexus/app/nexus-3.72.0-04/bin/nexus.rc 
+        regexp: '^#run_as_user='
+        line: 'run_as_user=nexus'   
+
+    - name: Create nexus.service file
+      copy:
+        dest: /etc/systemd/system/nexus.service
+        content: |
+          [Unit]
+          Description=nexus service
+          After=network.target
+
+          [Service]
+          Type=forking
+          LimitNOFILE=65536
+          User=nexus
+          Group=nexus
+          ExecStart=/home/nexus/app/nexus-3.72.0-04/bin/nexus start
+          ExecStop=/home/nexus/app/nexus-3.72.0-04/bin/nexus stop
+          Restart=on-abort
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Enable Nexus service
+      command: systemctl enable nexus
+
+    - name: Start Nexus service
+      service:
+        name: nexus
+        state: started
