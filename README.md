@@ -66,7 +66,7 @@ Before starting, ensure that you have the following tools installed and configur
 - Jenkins: For setting up the CI/CD pipeline.
 - Docker: For creating Jenkins agents.
 ## Setup Instructions
-## Terraform Setup
+### Terraform Setup
 Navigate to the terraform/ directory.
 Initialize Terraform and apply the Terraform configuration to provision the VPC, subnets, and EC2 instance:
 ```bash
