@@ -39,9 +39,14 @@ This project demonstrates the automated installation of Nexus on an AWS EC2 inst
 ```bash
 ├── terraform/
 │   ├── main.tf                # Defines VPC, Subnet, and EC2 instance
-│   ├── outputs.tf             # Outputs public IP and generates inventory file for Ansible
 │   ├── variables.tf           # Input variables for Terraform
-│   └── inventory.tpl          # Template for the Ansible inventory file
+│   ├── ec2.tf                 # EC2 instance configuration
+│   ├── internet_gateway.tf     # Internet gateway configuration
+│   ├── security_group.tf       # Security group configuration
+│   ├── ssh_key_pair.tf         # SSH key pair configuration
+│   ├── vpc.tf                 # VPC configuration
+│   ├── script.sh              # Script for additional provisioning tasks
+│   └── value.auto.tfvars      # Variable values for Terraform
 ├── ansible/
 │   ├── playbook.yml           # Playbook to install Nexus
 │   └── roles/
@@ -50,9 +55,8 @@ This project demonstrates the automated installation of Nexus on an AWS EC2 inst
 │           └── templates/     # Any necessary templates for Nexus configuration
 ├── Jenkinsfile                # Jenkins pipeline definition
 ├── docker/
-│   ├── Dockerfile.terraform   # Jenkins agent Dockerfile for Terraform
-│   └── Dockerfile.ansible     # Jenkins agent Dockerfile for Ansible
 └── README.md                  # Project documentation
+
 ```
 ## Pre-requisites
 
