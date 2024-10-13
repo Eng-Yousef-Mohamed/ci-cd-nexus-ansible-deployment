@@ -1,62 +1,40 @@
+variable "vpc_Name" {
+    description = "Name of the VPC."
+    type = string
+}
+
 variable "vpc_cidr_block" {
-  
-description = "this is cidr block of created vpc "
-type = string
-
+    description = "CIDR block for the VPC."
+    type = string
 }
 
-variable "subnet_cidr_block" {
-
-description = "this is cidr block of created subnet "
-type =string
-
+variable "public_subnets_cidr" {
+    description = "List of CIDR blocks for public subnets."
+    type = list(string)
 }
 
-variable "Name_vpc" {
-  description = "this name vpc "
-  type = string
-}
-variable "Name_subnet" {
-  description = "this name vpc "
-  type = string
+variable "availability_Zones_subnet" {
+    description = "List of Availability Zones for subnets."
+    type = list(string)
 }
 
-variable "instance_type" {
-  description = "This describes the instance type"
-  type = string
-  default = "t3.micro"
+variable "ec2_Name" {
+    description = "Name of the EC2 instance."
+    type = list(string)
 }
 
 variable "ami_id" {
-    description = "This describes the ami image which Amazon Linux 2023 AMI"
+    description = "AMI ID for the EC2 instance."
     type = string
-    default = "ami-090abff6ae1141d7d"
 }
 
-variable "ssh_port" {
-  description = "SSH Port"
-  type = number
-  
+variable "instance_type" {
+    description = "Type of EC2 instance."
+    type = string
 }
-variable "HTTP_port" {
-  description = "HTTP Port"
-  type = number
-  
-}
-variable "Nexus_port" {
-  description = "Nexus Port"
-  type = number
-}
-variable "region" {
-  type = string
 
+variable "key_Name" {
+    description = "SSH key pair name for instance access."
+    type = string
 }
-variable "Name_internet_gateway" {
-  type = string
-}
-variable "Name_route_table" {
-  type = string
-}
-variable "Name_ec2" {
-  type = string
-}
+
