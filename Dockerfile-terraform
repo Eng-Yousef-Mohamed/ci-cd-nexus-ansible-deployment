@@ -1,0 +1,11 @@
+FROM hashicorp/terraform:1.9
+
+# Set working directory
+WORKDIR /workspace
+
+# Copy Terraform files (main.tf, variables.tf, etc.) into the container
+COPY terraform .
+
+
+ENTRYPOINT ["terraform"] 
+
